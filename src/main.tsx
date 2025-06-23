@@ -18,8 +18,14 @@ import { RouterProvider } from 'react-router'
  */
 import './index.css'
 
+/**
+ * Routers
+ */
+import router from './routes'
+
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={}/>
+    <RouterProvider router={router}/>
   </StrictMode>,
 )
