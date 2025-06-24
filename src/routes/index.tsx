@@ -22,6 +22,7 @@ import HomePage from "@/pages/HomePage";
  */
 
 import RootLayout  from "@/layouts/RootLayout";
+import RootErrorBoundery from "@/pages/RootErrorBoundery"
 
 /**
  * types
@@ -41,6 +42,7 @@ const router = createBrowserRouter([
     {
         path: '/',
         element:<RootLayout />,
+        errorElement: <RootErrorBoundery/>,
         children: RootRoutChildren,
     } 
 ]);
