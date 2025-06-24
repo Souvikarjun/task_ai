@@ -21,7 +21,7 @@ const Header = () => {
                 </Button>
 
                 <Button asChild >
-                    <Link to="/login">Sign Up</Link>
+                    <Link to="/register">Start for free</Link>
                 </Button>
             </div>
         </div>
