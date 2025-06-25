@@ -1,7 +1,7 @@
 /**
- * @copyright 2024 codewithsadee
- * @license Apache-2.0
- * @description Constants for the app
+ * @copyright 2024 Souvikarjun
+ * @license MIT
+ * @description Assets for the app
  */
 
 /**

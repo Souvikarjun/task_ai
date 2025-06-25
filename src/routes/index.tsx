@@ -1,9 +1,8 @@
 /**
- * @copyright 2024 codewithsadee
+ * @copyright 2024 Souvikarjun
  * @license MIT
  * @description Assets for the app
  */
-
 
 /**
  * node modules
@@ -24,6 +23,7 @@ import RegisterPage from "@/pages/RegisterPage";
 
 import RootLayout  from "@/layouts/RootLayout";
 import RootErrorBoundery from "@/pages/RootErrorBoundery"
+import AppLayout from "@/layouts/AppLayout";
 
 /**
  * types
@@ -32,6 +32,7 @@ import RootErrorBoundery from "@/pages/RootErrorBoundery"
 import type { RouteObject } from "react-router";
 import LoginPage from "@/pages/LoginPage";
 import AuthSyncPage from "@/pages/AuthSyncPage";
+
 
 const RootRoutChildren: RouteObject[] = [
         {
@@ -59,7 +60,11 @@ const router = createBrowserRouter([
         element:<RootLayout />,
         errorElement: <RootErrorBoundery/>,
         children: RootRoutChildren,
-    } 
+    },
+    {
+        path: '/app',
+        element: <AppLayout/>
+    }
 ]);
 
 export default router

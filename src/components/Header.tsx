@@ -1,5 +1,5 @@
 /**
- * @copyright 2024 codewithsadeehttp://localhost:5173/
+ * @copyright 2024 Souvikarjun
  * @license MIT
  * @description Assets for the app
  */
