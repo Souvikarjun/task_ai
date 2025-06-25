@@ -35,7 +35,7 @@ const AuthSyncPage = () => {
     }, [isSignedIn, isLoaded, userId])
 
   return (
-    <div>AuthSyncPage</div>
+    <></>
   )
 }
 
