@@ -16,6 +16,7 @@ import { createBrowserRouter } from "react-router";
 
 import HomePage from "@/pages/HomePage";
 import RegisterPage from "@/pages/RegisterPage";
+import InboxPage from "@/pages/InboxPage";
 
 /**
  * layouts
@@ -53,6 +54,13 @@ const RootRoutChildren: RouteObject[] = [
         }
     ]
 
+const AppRouterChildren: RouteObject[] = [
+    {
+        path: 'inbox',
+        element: <InboxPage/>
+    }
+]
+
 
 const router = createBrowserRouter([
     {
@@ -63,7 +71,8 @@ const router = createBrowserRouter([
     },
     {
         path: '/app',
-        element: <AppLayout/>
+        element: <AppLayout/>,
+        children: AppRouterChildren,
     }
 ]);
 
