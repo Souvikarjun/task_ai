@@ -13,6 +13,7 @@ import { SIDEBAR_LINKS } from "@/constants";
 import { Collapsible } from "./ui/collapsible";
 import { CollapsibleContent, CollapsibleTrigger } from "@radix-ui/react-collapsible";
 import { TooltipTrigger, Tooltip, TooltipContent } from "@/components/ui/tooltip";
+import TaskFormDIal from "@/components/TaskFormDIal";
 
 
 const AppSidebar = () => {
@@ -26,9 +27,11 @@ const AppSidebar = () => {
             <SidebarGroupContent>
               <SidebarMenu>
                 <SidebarMenuItem>
-                  <SidebarMenuButton className="!text-primary">
-                    <CirclePlus /> Add Item
-                  </SidebarMenuButton>
+                  <TaskFormDIal>
+                    <SidebarMenuButton className="!text-primary">
+                      <CirclePlus /> Add Item
+                    </SidebarMenuButton>
+                  </TaskFormDIal>
                 </SidebarMenuItem>
 
                 {SIDEBAR_LINKS.map((items, index) =>(
