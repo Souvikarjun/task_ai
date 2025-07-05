@@ -22,6 +22,8 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import type { ClassValue } from "clsx"
 import type { TaskForm } from "@/types"
 
+import { formateCustomDate } from "@/lib/utils"
+
 type taskFormProps ={
   defaultFormData?: TaskForm
   className?: ClassValue
@@ -65,12 +67,17 @@ const TaskForm: React.FC<taskFormProps> = ({
             />
 
           <div className="ring ring-border rounded-md max-w-max">
-              <Popover>
+              <Popover open = {dueDateOpen} onOpenChange={setdueDateOpen}>
                 <PopoverTrigger>
-                  <Button type="button" variant="ghost" size='sm'><CalendarIcon/> Due Date</Button>
+                  <Button type="button" variant="ghost" size='sm'><CalendarIcon/> {duedate ? formateCustomDate(duedate) : 'Due Date'}</Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0 ">
-                  <Calendar mode="single" disabled = {{before: new Date()}} initialFocus/>
+                  <Calendar 
+                    mode="single" 
+                    disabled = {{before: new Date()}} 
+                    initialFocus
+                    onSelect={(selected) => {setduedate(selected||null); setdueDateOpen(false)}}
+                  />
                 </PopoverContent>
               </Popover>
 
