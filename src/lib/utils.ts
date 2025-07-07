@@ -50,6 +50,6 @@ export function getTaskDueDateColorClass(dueDate : Date | null , completed ?: bo
   } else if (isToday(dueDate)) {
     return 'text-blue-500';
   }
-  
+
   return 'text-muted-foreground';
 }

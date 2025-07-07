@@ -22,7 +22,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import type { ClassValue } from "clsx"
 import type { TaskForm } from "@/types"
 
-import { formateCustomDate } from "@/lib/utils"
+import { formateCustomDate, getTaskDueDateColorClass, cn } from "@/lib/utils"
 
 type taskFormProps ={
   defaultFormData?: TaskForm
@@ -55,6 +55,26 @@ const TaskForm: React.FC<taskFormProps> = ({
   const [ projectOpen, setprojectOpen ] = useState(false);
   const [ formData, setformData ] = useState(defaultFormData)
 
+  useEffect(() => {
+    setformData((prevFormData)=> ({
+
+      ...prevFormData,
+      content: taskContent,
+      due_date: duedate,
+      projectId: projectId,
+    }));
+  }, [taskContent, duedate, projectId]);  
+
+  const handleSubmit = useCallback(() => {
+    if(!taskContent) return;
+
+    console.log(formData)
+
+    if(onSubmit) onSubmit(formData);
+
+    settaskContent("");
+  }, [taskContent, formData, onSubmit]);
+
   return (
     <Card className="focus-within:border-foreground/30">
         <CardContent className="p-2">
@@ -67,9 +87,9 @@ const TaskForm: React.FC<taskFormProps> = ({
             />
 
           <div className="ring ring-border rounded-md max-w-max">
-              <Popover open = {dueDateOpen} onOpenChange={setdueDateOpen}>
+              <Popover open = {dueDateOpen} onOpenChange={setdueDateOpen} >
                 <PopoverTrigger>
-                  <Button type="button" variant="ghost" size='sm'><CalendarIcon/> {duedate ? formateCustomDate(duedate) : 'Due Date'}</Button>
+                  <Button type="button" variant="ghost" size='sm' className={cn(getTaskDueDateColorClass(duedate, false))}><CalendarIcon/> {duedate ? formateCustomDate(duedate) : 'Due Date'}</Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0 ">
                   <Calendar 
@@ -81,20 +101,22 @@ const TaskForm: React.FC<taskFormProps> = ({
                 </PopoverContent>
               </Popover>
 
-              <Tooltip>
+              {duedate && (
+                <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button variant='ghost' size='sm' className="px-2 -ms-2" aria-label="'Remove Due Date">
+                  <Button variant='ghost' size='sm' className="px-2 -ms-2" aria-label="'Remove Due Date" onClick={() => setduedate(null)}>
                     <X/>
                   </Button>
                 </TooltipTrigger>
               </Tooltip>
+              )}
           </div>
         </CardContent>
 
         <Separator/>
 
         <CardFooter className="grid grid-cols-[minmax(0,1fr),max-content] gapp-2 p-2">
-          <Popover modal>
+          <Popover modal open={projectOpen} onOpenChange={setprojectOpen}>
             <PopoverTrigger asChild>
               <Button variant='ghost' role="combobox" aria-expanded={false} className="max-w-max "><Inbox/> Inbox <ChevronDown/></Button>
             </PopoverTrigger>
@@ -126,13 +148,13 @@ const TaskForm: React.FC<taskFormProps> = ({
           </Popover>
 
           <div className="flex items-center gap-2">
-            <Button variant='secondary'>
+            <Button variant='secondary' onClick={onCancle}>
               <span className="max-md:hidden">Cancle</span>
               <X className="md:hidden"/>
             </Button>
             
-            <Button>
-              <span className="max-md:hidden">Add Task</span>
+            <Button disabled={!taskContent} type="submit" onClick={handleSubmit}>
+              <span className="max-md:hidden">{mode == 'create' ? 'Add Task' : "Save"}</span>
               <SendHorizonal className="md:hidden"/>
             </Button>
           </div>
