@@ -80,7 +80,6 @@ const TaskForm: React.FC<taskFormProps> = ({
   const handleSubmit = useCallback(() => {
     if(!taskContent) return;
 
-    console.log(formData)
 
     if(onSubmit) onSubmit(formData);
 

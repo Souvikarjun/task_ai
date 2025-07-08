@@ -1,8 +1,5 @@
-/**
- * @copyright 2024 Souvikarjun
- * @license MIT
- * @description Assets for the app
- */
+     
+
 
 /**
  * Node Modules 

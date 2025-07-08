@@ -1,8 +1,5 @@
-/**
- * @copyright 2024 Souvikarjun
- * @license MIT
- * @description Assets for the app
- */
+     
+
 
 /**
  * node modules
@@ -25,6 +22,8 @@ import InboxPage from "@/pages/InboxPage";
 import RootLayout  from "@/layouts/RootLayout";
 import RootErrorBoundery from "@/pages/RootErrorBoundery"
 import AppLayout from "@/layouts/AppLayout";
+
+import appAction from "@/routes/actions/appActions";
 
 /**
  * types
@@ -73,7 +72,7 @@ const router = createBrowserRouter([
         path: '/app',
         element: <AppLayout/>,
         children: AppRouterChildren,
-    }
+        action: appAction    }
 ]);
 
 export default router

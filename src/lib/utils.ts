@@ -1,8 +1,5 @@
-/**
- * @copyright 2024 Souvikarjun
- * @license MIT
- * @description Assets for the app
- */
+     
+
 
 
 import { clsx, type ClassValue } from "clsx"
@@ -43,12 +40,12 @@ export function getTaskDueDateColorClass(dueDate : Date | null , completed ?: bo
   const today = startOfToday();
   if (isBefore(dueDate, today)) {
     return 'text-red-500';
+  } else if (isToday(dueDate)) {
+    return 'text-blue-500';
   } else if (isTomorrow(dueDate)) {
     return 'text-yellow-500';
   } else if (isAfter(dueDate, today)) {
     return 'text-green-500';
-  } else if (isToday(dueDate)) {
-    return 'text-blue-500';
   }
 
   return 'text-muted-foreground';
