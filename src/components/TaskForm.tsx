@@ -20,19 +20,20 @@ import { Tooltip, TooltipTrigger } from "@/components/ui/tooltip"
 import { Command, CommandInput, CommandEmpty, CommandGroup, CommandList, CommandItem } from "@/components/ui/command"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import type { ClassValue } from "clsx"
-import type { TaskForm } from "@/types"
-
+import type { TaskFormProp } from "@/types"
 import { formateCustomDate, getTaskDueDateColorClass, cn } from "@/lib/utils"
+import * as chrono from 'chrono-node'
+
 
 type taskFormProps ={
-  defaultFormData?: TaskForm
+  defaultFormData?: TaskFormProp
   className?: ClassValue
   mode: 'create' | 'edit'
   onCancle?: () => void
-  onSubmit?: (formData: TaskForm) => void
+  onSubmit?: (formData: TaskFormProp) => void
 }
 
-const DEFAULT_FORM_DATA: TaskForm = {
+const DEFAULT_FORM_DATA: TaskFormProp = {
   content: '',
   due_date: null,
   project: null,
@@ -65,6 +66,17 @@ const TaskForm: React.FC<taskFormProps> = ({
     }));
   }, [taskContent, duedate, projectId]);  
 
+  useEffect(() => {
+    const chronoParsed = chrono.parse(taskContent)
+
+    if(chronoParsed.length ) {
+      const LastDate = chronoParsed[chronoParsed.length - 1]
+      setduedate(LastDate.date())
+    }
+
+
+  }, [taskContent])
+
   const handleSubmit = useCallback(() => {
     if(!taskContent) return;
 
@@ -89,7 +101,7 @@ const TaskForm: React.FC<taskFormProps> = ({
           <div className="ring ring-border rounded-md max-w-max">
               <Popover open = {dueDateOpen} onOpenChange={setdueDateOpen} >
                 <PopoverTrigger>
-                  <Button type="button" variant="ghost" size='sm' className={cn(getTaskDueDateColorClass(duedate, false))}><CalendarIcon/> {duedate ? formateCustomDate(duedate) : 'Due Date'}</Button>
+                  <Button type="button" variant="ghost" size='sm' className={cn(getTaskDueDateColorClass(duedate, true))}><CalendarIcon/> {duedate ? formateCustomDate(duedate) : 'Due Date'}</Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0 ">
                   <Calendar 
@@ -118,7 +130,7 @@ const TaskForm: React.FC<taskFormProps> = ({
         <CardFooter className="grid grid-cols-[minmax(0,1fr),max-content] gapp-2 p-2">
           <Popover modal open={projectOpen} onOpenChange={setprojectOpen}>
             <PopoverTrigger asChild>
-              <Button variant='ghost' role="combobox" aria-expanded={false} className="max-w-max "><Inbox/> Inbox <ChevronDown/></Button>
+              <Button variant='ghost' role="combobox" aria-expanded={projectOpen} className="max-w-max "><Inbox/> Inbox <ChevronDown/></Button>
             </PopoverTrigger>
 
             <PopoverContent className="w-[240px] p-0" align="start">

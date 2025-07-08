@@ -29,7 +29,7 @@ type Task = {
   userId: string;
 }
 
-type TaskForm = {
+type TaskFormProp = {
   id?: string;
   content: string;
   due_date: Date | null;
@@ -37,4 +37,4 @@ type TaskForm = {
   project: string | null;
 }
 
-export type { Project, ProjectForm, Task, TaskForm }
+export type { Project, ProjectForm, Task, TaskFormProp }
