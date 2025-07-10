@@ -5,6 +5,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { formatRelative, isSameYear, format, isBefore, isAfter, isTomorrow, isToday, startOfToday } from "date-fns";
+import { redirect } from "react-router";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -49,4 +50,19 @@ export function getTaskDueDateColorClass(dueDate : Date | null , completed ?: bo
   }
 
   return 'text-muted-foreground';
+}
+
+
+export function generateId(){
+  return Math.random().toString(36).slice(8) + Date.now().toString(36);
+}
+
+export function getUserId(): string {
+    const userId = localStorage.getItem('clerkUserId');
+
+    if(!userId) {
+        redirect('/auth-sync');
+        return ''
+    }
+    return userId;
 }
