@@ -25,8 +25,8 @@ type Task = {
   content: string;
   due_date: Date | null;
   completed?: boolean;
-  projectId: Project | null;
-  userId: string;
+  projectId?: Project | null;
+  userId?: string;
 }
 
 type TaskFormProp = {
@@ -34,7 +34,7 @@ type TaskFormProp = {
   content: string;
   due_date: Date | null;
   completed?: boolean;
-  project: string | null;
+  projectId?: string | null;
 }
 
 export type { Project, ProjectForm, Task, TaskFormProp }

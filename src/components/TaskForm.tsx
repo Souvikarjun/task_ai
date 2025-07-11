@@ -36,7 +36,7 @@ type taskFormProps ={
 const DEFAULT_FORM_DATA: TaskFormProp = {
   content: '',
   due_date: null,
-  project: null,
+  projectId: null,
 } 
 
 const TaskForm: React.FC<taskFormProps> = ({

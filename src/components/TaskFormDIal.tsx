@@ -24,7 +24,7 @@ const TaskFormDIal: React.FC<PropsWithChildren> = ({children}) => {
         </DialogTrigger>
 
         <DialogContent className="p-0 border-0 !rounded-xl">
-            <TaskForm defaultFormData={{content:"", due_date: location.pathname == '/app/today' ? startOfToday() : null, project: null,}} mode="create" onCancle={() => setOpen(false)} onSubmit={(formData) => {
+            <TaskForm defaultFormData={{content:"", due_date: location.pathname == '/app/today' ? startOfToday() : null, projectId: null,}} mode="create" onCancle={() => setOpen(false)} onSubmit={(formData) => {
               fetcher.submit(JSON.stringify(formData), {
                 action: '/app',
                 method: 'POST',
