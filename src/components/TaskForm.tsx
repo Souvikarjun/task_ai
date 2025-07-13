@@ -87,7 +87,7 @@ const TaskForm: React.FC<taskFormProps> = ({
   }, [taskContent, formData, onSubmit]);
 
   return (
-    <Card className="focus-within:border-foreground/30">
+    <Card className={cn("focus-within:border-foreground/30",className)}>
         <CardContent className="p-2">
             <Textarea 
               className="!border-0 !ring-0 mb-2 p-2" 
@@ -95,6 +95,13 @@ const TaskForm: React.FC<taskFormProps> = ({
               autoFocus
               value={taskContent}
               onInput={(e) => settaskContent(e.currentTarget.value)}
+              onKeyDown={(e) => {
+                if(e.key == 'Enter') {
+                  e.preventDefault();
+                  handleSubmit();
+                }
+              }
+            }
             />
 
           <div className="ring ring-border rounded-md max-w-max">

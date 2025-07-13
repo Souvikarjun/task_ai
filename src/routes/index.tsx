@@ -32,6 +32,7 @@ import appAction from "@/routes/actions/appActions";
 import type { RouteObject } from "react-router";
 import LoginPage from "@/pages/LoginPage";
 import AuthSyncPage from "@/pages/AuthSyncPage";
+import inboxTaskLoader from "./loaders/inboxLoader";
 
 
 const RootRoutChildren: RouteObject[] = [
@@ -56,7 +57,8 @@ const RootRoutChildren: RouteObject[] = [
 const AppRouterChildren: RouteObject[] = [
     {
         path: 'inbox',
-        element: <InboxPage/>
+        element: <InboxPage/>,
+        loader: inboxTaskLoader,
     }
 ]
 

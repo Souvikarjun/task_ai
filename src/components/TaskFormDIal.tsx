@@ -4,7 +4,7 @@
  * @description Assets for the app
  */
 
-import { useState, type PropsWithChildren } from "react"
+import { useEffect, useState, type PropsWithChildren } from "react"
 import { useLocation, useFetcher } from "react-router"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import TaskForm from "@/components/TaskForm"
@@ -16,6 +16,24 @@ const TaskFormDIal: React.FC<PropsWithChildren> = ({children}) => {
   const fetcher = useFetcher()
 
   const [open, setOpen] =  useState(false)
+
+  useEffect(() => {
+    const listener = (event: KeyboardEvent) => {
+      if(event.key == 'q') {
+        const target = event.target as HTMLElement;
+        if(target.localName == 'textarea') return;
+
+        event.preventDefault();
+        setOpen(true)
+    }
+
+  }
+    document.addEventListener('keydown', listener)
+
+    return () => document.removeEventListener('keydown', listener);
+
+
+    }, [] )
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
